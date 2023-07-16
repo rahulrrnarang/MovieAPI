@@ -1,2 +1,6 @@
-# database
+#enviroments
+api_credentials.env
+
+# django
 db.sqlite3
+__pycache__
