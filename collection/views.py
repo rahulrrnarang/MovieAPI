@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import requests
+from requests.auth import HTTPBasicAuth
 import os
 
 from rest_framework.views import APIView
@@ -16,5 +17,12 @@ class MayaMovieApi(APIView):
 
     def get(self, request):
         """Fetch movie list."""
-        requests.get()
-        
+        page = request.query_params.get('page')
+        print(request.get_host(), 'rahul_narang')
+        response = requests.get(
+            self.url,
+            auth=HTTPBasicAuth(self.username, self.password),
+            params={'page':page} if page else None
+        )
+        return Response(response.json(), status=response.status_code)
+

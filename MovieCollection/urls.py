@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from collection.urls import *
+from collection.views import MayaMovieApi
+
+from userAuth.views import RegisterUser
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('collection/', include('collection.urls')),
+    path('request-count/', include('userAuth.urls')),
+    path('movies/', MayaMovieApi.as_view(), name='all-movies'),
+    path('register/', RegisterUser.as_view(), name='register-user')
 ]
